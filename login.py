@@ -11,8 +11,10 @@ def login(username, password):
 	'user[email]':username,
 	'user[password]': password,
 	'return_to':'https://devpost.com/'}
-	if str(r.post("https://secure.devpost.com/users/login", data=data).url) != 'https://devpost.com/':
-		return False
+	a = str(r.post("https://secure.devpost.com/users/login", data=data).url)
+	if a != 'https://devpost.com/':
+		status = False
 	else:
-		return True
+		status = True
+	return str({"Status": status})
 
