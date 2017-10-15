@@ -1,15 +1,12 @@
 #!flask/bin/python
 from flask import Flask, jsonify
 from bs4 import BeautifulSoup
-import requests, time
+import requests
 import urllib
-import datetime
-import threading
 
 app = Flask(__name__)
 
-
-def grabHackathons(events):
+def grab_hackathons(events):
     devpost_html = requests.get('https://devpost.com/hackathons?page=1000')
     soup = BeautifulSoup(devpost_html.content, "lxml")
     num = int(soup.select(".pagination a")[-1].getText().strip())
@@ -42,7 +39,7 @@ def request_stuff(events, page, i):
 @app.route('/')
 def index():
     events = {}
-    grabHackathons(events)
+    grab_hackathons(events)
     return jsonify(events)
 
 if __name__ == '__main__':
