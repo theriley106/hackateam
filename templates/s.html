@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title>Custom marker tooltips</title>
+<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+<script src='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.js'></script>
+<link href='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.css' rel='stylesheet' />
+<style>
+  body { margin:0; padding:0; }
+  #map { position:absolute; top:0; bottom:0; width:100%; }
+  .leaflet-popup-content {
+width:auto !important;
+}
+</style>
+</head>
+<body>
+
+
+<style>
+.leaflet-popup-content img {
+  width:100px;
+  height: 100px;
+  }
+</style>
+<div id='map'></div>
+
+<script>
+L.mapbox.accessToken = 'pk.eyJ1IjoidGhlcmlsZXkxMDYiLCJhIjoiY2o4cm1xZzdnMTgzMDMzbnR1d3Q2Y2p6byJ9.C-Kuwbt67fBaEg0V5rGXzg';
+var map = L.mapbox.map('map', 'mapbox.streets')
+    .setView([43.229, -79.453], 5);
+
+var myLayer = L.mapbox.featureLayer().addTo(map);
+
+var geoJson = [
+
+{
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [-77.03, 38.90]},
+    "properties": {
+        "image": "https://avatars1.githubusercontent.com/u/20630177?v=4?height=180&amp;width=180",
+        "marker-symbol": "star",
+        "marker-color": "#ff8888",
+        "marker-size": "large",
+        "city": "This is the Hackathon Location"
+    }
+}, 
+
+
+
+
+{
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [40.0757384, -74.4041622]},
+    "properties": {
+        "image": http://challengepost-s3-challengepost.netdna-ssl.com/photos/production/user_photos/000/529/564/datas/profile.jpg,
+        "url": https://devpost.com/akshaya19,
+        "marker-color": "#ff8888",
+        "city": New Jersey, United States
+    }
+},
+
+
+
+{
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [-81.33, 41.88]},
+    "properties": {
+        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Chicago_sunrise_1.jpg/640px-Chicago_sunrise_1.jpg",
+        "url": "https://en.wikipedia.org/wiki/Chicago",
+        "marker-color": "#ffffff",
+        "city": "Chicago"
+    }
+}, 
+
+{
+    type: 'Feature',
+    "geometry": { "type": "Point", "coordinates": [-74.00, 40.71]},
+    "properties": {
+        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/NYC_Top_of_the_Rock_Pano.jpg/640px-NYC_Top_of_the_Rock_Pano.jpg",
+        "url": "https://en.wikipedia.org/wiki/New_York_City",
+        "marker-color": "#ff8888",
+        "city": "New York City"
+    }
+}
+
+];
+
+// Add custom popups to each using our custom feature properties
+myLayer.on('layeradd', function(e) {
+    var marker = e.layer,
+        feature = marker.feature;
+
+    // Create custom popup content
+    var popupContent =  '<a target="_blank" class="popup" href="' + feature.properties.url + '">' +
+                            '<img src="' + feature.properties.image + '" />' +
+                            feature.properties.city +
+                        '</a>';
+
+    // http://leafletjs.com/reference.html#popup
+    marker.bindPopup(popupContent,{
+        closeButton: false,
+        minWidth: 320
+    });
+});
+
+// Add features to the map
+myLayer.setGeoJSON(geoJson);
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <title>Neural Net</title>
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+</style>
+<script type = "text/javascript">
+function test() {
+        setTimeout(function() {
+            document.getElementById("myDiv").style.display="none";
+        }, 3000);
+        
+    }
+    </script> 
+</head>
+
+
+<body>
+<center>
+<form id="msform" action = "{{url_for('Add') }}" method = "post">
+<select name="member1" class="form-control" style="text-align:center; width: 80%; top: -15px;margin: 20px auto;">
+    {% for user in participants %}
+	<option value="{{ user.Name }}">{{ user.Name }}</option>
+	{% endfor %}
+</select>
+</center>
+
+<br><br>
+<center>
+<fieldset>
+<select name="member2" class="form-control" style="text-align:center; width: 80%; top: -15px;margin: 20px auto;">
+	{% for user in participants %}
+	<option value="{{ user.Name }}">{{ user.Name }}</option>
+	{% endfor %}
+</select>
+<br><br>
+<button type="submit" class="btn btn-primary btn-block" style="text-align:center; width: 80%; top: -15px;margin: 20px auto;">Calculate Team Effeciency</button>
+</center>
+</fieldset>
+</form>
+</body>
+
+</html>
