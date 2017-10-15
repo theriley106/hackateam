@@ -33,7 +33,7 @@ def fetch_github_data():
                 "}"
               "}}"
             }
-    api_token = "dde7406d2642258b686aa2ef8dcaebd187da8acb"
+    api_token = ""
     headers = {"Authorization": "token %s" % api_token}
     github_data = requests.post(url = github_url, json = json, headers = headers)
 
